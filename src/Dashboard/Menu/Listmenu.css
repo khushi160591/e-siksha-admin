@@ -1,0 +1,6 @@
+th,tr,td{
+   text-align: center;
+}
+tr,td{
+    height: 50px;
+}

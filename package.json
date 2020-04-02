@@ -1,0 +1,22 @@
+{
+  "name": "my-admin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "env-cmd": "^10.1.0",
+    "jquery": "^1.9.1",
+    "popper.js": "^1.16.1",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-icons": "^3.9.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "0.9.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "env-cmd -e development react-scripts start",
+    "build": "env-cmd -e production react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

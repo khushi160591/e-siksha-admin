@@ -1,0 +1,13 @@
+.selectBox{
+    width: 442px;
+    height: 41px;
+    cursor: pointer;
+}
+.box{
+    border:1px solid #ccc;
+    padding: 3%;
+    margin-top: 30px;
+}
+.btnAdd{
+    float: right;
+}

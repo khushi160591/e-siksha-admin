@@ -1,57 +1,76 @@
-import React , {Component} from 'react';
+import React, { Component } from 'react';
 import './Listmenu.css';
 import Table from 'react-bootstrap/Table';
-class Listmenu extends Component{
+import Dashboardservice from '../../Service/Dashboardservice';
+class Listmenu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuList: []
+        }
+    }
 
-    render(){
-        return(
-  <div>
-   
-                <div className="container">
-                <div className="col-md-12 adminRight">
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                       
-                        <th>ID</th>
-                        <th>Name</th>
-                
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td>1</td>
-                       
-                        <td>Otto</td>
-                       
-                        </tr>
-                        <tr>
-                        <td>2</td>
-                        
-                        <td>Thornton</td>
-                       
-                        </tr>
-                        <tr>
-                        <td>3</td>
-                        <td>Larry the Bird</td>
-                        
-                        </tr>
-                        <tr>
-                        <td>4</td>
-                        <td>Larry the Bird</td>
-                        
-                        </tr>
-                        <tr>
-                        <td>5</td>
-                        <td>Larry the Bird</td>
-                        
-                        </tr>
-                    </tbody>
-                    </Table>
-                  
-                </div>
-                </div>
-     </div>           
+    componentDidMount() {
+        this.getMenu();
+    }
+    getMenu() {
+        Dashboardservice.getMenuList()
+            .then(res => {
+                if (res.statusInfo.statusCode === 200) {
+                    this.setState({
+                        menuList: res.responseData
+                    })
+                }
+            })
+            .catch(error => {
+                console.log("error message: ", error);
+                alert("error is getting..")
+            });
+
+    }
+
+
+
+    render() {
+        return ( <
+            div >
+
+            <
+            div className = "container" >
+            <
+            div className = "col-md-12 adminRight" >
+            <
+            Table striped bordered hover >
+            <
+            thead >
+            <
+            tr >
+            <
+            th > ID < /th> <
+            th > Name < /th> <
+            /tr> <
+            /thead> <
+            tbody > {
+                this.state.menuList.map((menu, index) => {
+                    return ( <
+                        tr key = { menu.id } >
+                        <
+                        td > { menu.id } < /td> <
+                        td > { menu.name } < /td> <
+                        /tr>
+                    )
+                })
+            }
+
+
+            <
+            /tbody> <
+            /Table>
+
+            <
+            /div> <
+            /div> <
+            /div>           
         );
     }
 }

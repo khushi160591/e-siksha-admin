@@ -1,8 +1,34 @@
 import React , {Component} from 'react';
 import './Listtopic.css';
 import Table from 'react-bootstrap/Table';
-class Listtopic extends Component{
+import Dashboardservice from '../../Service/Dashboardservice';
 
+class Listtopic extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            topicList:[]
+        }
+    }
+  
+    componentDidMount() {
+      this.getTopic();
+    }
+    getTopic(){
+         Dashboardservice.getTopicList()
+         .then(res => {
+          if (res.statusInfo.statusCode === 200) {
+            this.setState({
+                topicList : res.responseData
+            })
+          }
+        })
+        .catch(error => {
+          console.log("error message: ", error);
+         alert("error is getting..")
+        });
+         
+        }  
     render(){
         return(
   <div>
@@ -19,33 +45,15 @@ class Listtopic extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <td>1</td>
-                       
-                        <td>Otto</td>
-                       
-                        </tr>
-                        <tr>
-                        <td>2</td>
-                        
-                        <td>Thornton</td>
-                       
-                        </tr>
-                        <tr>
-                        <td>3</td>
-                        <td>Larry the Bird</td>
-                        
-                        </tr>
-                        <tr>
-                        <td>4</td>
-                        <td>Larry the Bird</td>
-                        
-                        </tr>
-                        <tr>
-                        <td>5</td>
-                        <td>Larry the Bird</td>
-                        
-                        </tr>
+                       {this.state.topicList.map((topic , index) => {
+                           return(
+                               <tr key = {topic.id}>
+                                <td>{topic.id}</td>
+                                  <td>{topic.name}</td>
+                               </tr>
+                           )
+                       }
+                       )}
                     </tbody>
                     </Table>
                   

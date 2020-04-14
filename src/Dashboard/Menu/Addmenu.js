@@ -22,7 +22,6 @@ class Addmenu extends Component{
     }
     handleSubmit (event){
         event.preventDefault();
-        console.log("hiii")
         const data = { 
             name:this.state.name,
             code:this.state.code,
@@ -32,12 +31,12 @@ class Addmenu extends Component{
         Dashboardservice.addMenu(data)
         .then(res => {
             if (res.statusInfo.statusCode === 200) {
-              alert("successful")
+              alert("successful....")
             }
           })
           .catch(error => {
             console.log("error message: ", error);
-           alert("error will reading..")
+           alert("error is getting..")
           });
       };
     
@@ -74,7 +73,7 @@ class Addmenu extends Component{
                 <div className="row formAdmin">
                     <div className="col-md-1"></div>
                     <div className="col-md-5">
-                    <button  class="btn btn-primary btn-lg btn-block" >Submit</button>
+                    <button  className="btn btn-primary btn-lg btn-block" >Submit</button>
                     </div>
                 </div>
                 </form>

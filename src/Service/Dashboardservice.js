@@ -5,12 +5,44 @@ const BASE_URL="http://localhost:9090"
 const Dashboardservice = {
     addTopic,
     addMenu,
-    addsubtopicTopic,
+    addSubtopicTopic,
     addTheory,
     addMultiple,
-    mapTopic
+    mapTopic,
+    getMenuList,
+    getTopicList,
+    getSubtopicList,
+    getTheoryList
+    
+
 };
- 
+
+   function getTopicList(){
+    const gettopiclist = BASE_URL + "/admin/get/topic/list" 
+    return fetch(gettopiclist ,{
+        method : 'GET'
+        }).then(handleResponse);
+   }
+
+   function getMenuList(){
+    const getmenulist = BASE_URL + "/admin/menu/list" 
+    return fetch(getmenulist ,{
+        method : 'GET'
+        }).then(handleResponse);
+   }
+   function getSubtopicList(query){
+       const getsubtopiclist = BASE_URL + "/admin/get/subtopic" + query
+       return fetch (getsubtopiclist ,{
+           method : 'GET'
+       }).then(handleResponse);
+   }
+   function getTheoryList(){
+    const gettheorylist = BASE_URL + "/admin/get/theory/list"
+    return fetch (gettheorylist ,{
+        method : 'GET'
+    }).then(handleResponse);
+}
+
    function addMenu(data){
     console.log(process.env.BASE_URL)
     const addmenuUrl = BASE_URL + "/admin/menu/addOrUpdate"
@@ -24,7 +56,7 @@ const Dashboardservice = {
 
   
    function addTopic(data){
-    const addtopicUrl = BASE_URL 
+    const addtopicUrl = BASE_URL + "/admin/topic/addOrUpdate"
     return fetch(addtopicUrl ,{
         method : 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -33,8 +65,8 @@ const Dashboardservice = {
    }
 
    
-   function addsubtopicTopic(data){
-    const addsubtopictopicUrl = BASE_URL 
+   function addSubtopicTopic(data){
+    const addsubtopictopicUrl = BASE_URL + "/admin/subtopic/add"
     return fetch(addsubtopictopicUrl ,{
         method : 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -42,29 +74,21 @@ const Dashboardservice = {
         }).then(handleResponse);
     }
 
-   function addTheory(name , code ,description){
-    const addtheoryUrl = BASE_URL
+   function addTheory(data){
+    const addtheoryUrl = BASE_URL + "/admin/theortical/add"
     return fetch(addtheoryUrl ,{
         method : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body :  JSON.stringify({
-             name : name,
-             code : code,
-             description : description
-        })
-    }).then(handleResponse);
-   }
+        body :  JSON.stringify(data)
+        }).then(handleResponse);
+    }
 
-   function addMultiple(name , code ,description){
-    const addmultipleUrl = BASE_URL 
+   function addMultiple(data){
+    const addmultipleUrl = BASE_URL +"/admin/multiple/add"
     return fetch(addmultipleUrl ,{
         method : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body :  JSON.stringify ({
-             name : name,
-             code : code,
-             description : description
-        })
+        body :  JSON.stringify(data)
     }).then(handleResponse);
    }
 

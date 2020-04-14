@@ -1,8 +1,34 @@
 import React , {Component} from 'react';
 import './Listsubtopic.css';
 import Table from 'react-bootstrap/Table';
+import Dashboardservice from '../../Service/Dashboardservice';
 
 class Listsubtopic extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+           subtopicList:[]
+        }
+    }
+
+    componentDidMount() {
+        this.getSubTopic();
+      }
+      getSubTopic(){
+        Dashboardservice.getSubtopicList()
+        .then(res => {
+         if (res.statusInfo.statusCode === 200) {
+           this.setState({
+            subtopicList : res.responseData
+           })
+         }
+       })
+       .catch(error => {
+         console.log("error message: ", error);
+        alert("error is getting..")
+       });
+        
+       }
     render(){
         return(
             <div>
@@ -18,34 +44,15 @@ class Listsubtopic extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <td>1</td>
-
-                        <td>Html</td>
-                        <td>Css</td>
-                        </tr>
-                        <tr>
-                        <td>2</td>
-                        
-                        <td>Thornton</td>
-                        <td>Html</td>
-                        </tr>
-                        <tr>
-                        <td>3</td>
-                        <td>Larry the Bird</td>
-                        <td>Html</td>
-                        </tr>
-                        <tr>
-                        <td>4</td>
-                        <td>Larry the Bird</td>
-                        <td>Html</td>
-                        </tr>
-                        <tr>
-                        <td>5</td>
-                        <td>Larry the Bird</td>
-                        <td>Html</td>
-                        
-                        </tr>
+                    {this.state.subtopicList.map((subtopic , index) => {
+                           return(
+                               <tr key = {subtopic.id}>
+                                <td>{subtopic.id}</td>
+                                  <td>{subtopic.name}</td>
+                               </tr>
+                           )
+                       }
+                       )}
                     </tbody>
                     </Table>
                   

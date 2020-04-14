@@ -1,28 +1,46 @@
 import React , {Component} from 'react';
 import './Addtopic.css';
+import Dashboardservice from '../../Service/Dashboardservice';
 
 class Addtopic extends Component{
-      constructor(props){
-          super(props);
-          this.state = {
-              name : '',
-              code : '',
-              description : ''
-          }
-        }
-          handleChange = event =>{
-            this.setState({ 
-                [event.target.id] :event.target.value 
-            })
-            }
-            handleSubmit = event =>{
-                event.preventDefault();
-                
-      }
-
+    constructor(props){
+        super(props);
+        this.state = {
+         name : '',
+         code : '',
+         description : ''
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+ 
+    handleChange = event =>{
+         this.setState({ 
+         [event.target.id]:event.target.value 
+     })
+     }
+     handleSubmit (event){
+         event.preventDefault();
+         const data = { 
+             name:this.state.name,
+             code:this.state.code,
+             description : this.state.description 
+         }
+ 
+         Dashboardservice.addTopic(data)
+        
+         .then(res => {
+             if (res.statusInfo.statusCode === 200) {
+               alert("successful....")
+             }
+           })
+           .catch(error => {
+             console.log("error message: ", error);
+            alert("error is getting..")
+           });
+       };
     
     render(){
-        const data = { name:this.state.name, code:this.state.code ,description : this.state.description }
 
         return(
            <div>
@@ -30,7 +48,7 @@ class Addtopic extends Component{
                 <div className="container">
                 <div className="col-md-12 adminRight">
 
-                    <form role="form">
+                    <form role="form" onSubmit={this.handleSubmit}>
                 <div className="row formAdmin">
                     <label className="col-md-2" for="name">Name : </label>
                     <div className="col-md-5">
@@ -53,9 +71,8 @@ class Addtopic extends Component{
                 <div className="row formAdmin">
                     <div className="col-md-2"></div>
                     <div className="col-md-5">
-                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="button" aria-pressed="false" autocomplete="off" 
-                    onSubmit = {this.handleSubmit}>
-                        Submit</button>
+                    <button  className="btn btn-primary btn-lg btn-block" >Submit</button>
+
                     </div>
                 </div>
                 </form>

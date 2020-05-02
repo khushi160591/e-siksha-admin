@@ -1,6 +1,6 @@
 import React , {Component} from 'react';
 
-const BASE_URL="http://localhost:9090"
+const BASE_URL=process.env.BASE_URL
 
 const Dashboardservice = {
     addTopic,
@@ -19,26 +19,26 @@ const Dashboardservice = {
   
   
    function getTopicList(){
-    const gettopiclist = BASE_URL + "/admin/get/topic/list" 
+    const gettopiclist = BASE_URL + "/api/admin/get/topic/list" 
     return fetch(gettopiclist ,{
         method : 'GET'
         }).then(handleResponse);
    }
 
    function getMenuList(){
-    const getmenulist = BASE_URL + "/admin/menu/list" 
+    const getmenulist = BASE_URL + "/api/admin/menu/list" 
     return fetch(getmenulist ,{
         method : 'GET'
         }).then(handleResponse);
    }
    function getSubtopicList(query){
-       const getsubtopiclist = BASE_URL + "/admin/get/subtopic" + query
+       const getsubtopiclist = BASE_URL + "/api/admin/get/subtopic" + query
        return fetch (getsubtopiclist ,{
            method : 'GET'
        }).then(handleResponse);
    }
    function getTheoryList(){
-    const gettheorylist = BASE_URL + "/admin/get/theory/list"
+    const gettheorylist = BASE_URL + "/api/admin/get/theory/list"
     return fetch (gettheorylist ,{
         method : 'GET'
     }).then(handleResponse);
@@ -46,7 +46,7 @@ const Dashboardservice = {
 
    function addMenu(data){
     console.log(process.env.BASE_URL)
-    const addmenuUrl = BASE_URL + "/admin/menu/addOrUpdate"
+    const addmenuUrl = BASE_URL + "/api/admin/menu/addOrUpdate"
     return fetch(addmenuUrl ,{
         method : 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -57,7 +57,7 @@ const Dashboardservice = {
 
   
    function addTopic(data){
-    const addtopicUrl = BASE_URL + "/admin/topic/addOrUpdate"
+    const addtopicUrl = BASE_URL + "/api/admin/topic/addOrUpdate"
     return fetch(addtopicUrl ,{
         method : 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -67,7 +67,7 @@ const Dashboardservice = {
 
    
    function addSubtopicTopic(data){
-    const addsubtopictopicUrl = BASE_URL + "/admin/subtopic/add"
+    const addsubtopictopicUrl = BASE_URL + "/api/admin/subtopic/add"
     return fetch(addsubtopictopicUrl ,{
         method : 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -76,7 +76,7 @@ const Dashboardservice = {
     }
 
    function addTheory(data){
-    const addtheoryUrl = BASE_URL + "/admin/theortical/add"
+    const addtheoryUrl = BASE_URL + "/api/admin/theortical/add"
     return fetch(addtheoryUrl ,{
         method : 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -85,7 +85,7 @@ const Dashboardservice = {
     }
 
    function addMultiple(data){
-    const addmultipleUrl = BASE_URL +"/admin/multiple/add"
+    const addmultipleUrl = BASE_URL +"/api/admin/multiple/add"
     return fetch(addmultipleUrl ,{
         method : 'POST',
         headers: { 'Content-Type': 'application/json' },

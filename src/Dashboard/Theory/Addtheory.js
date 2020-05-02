@@ -18,6 +18,7 @@ class Addtheory extends Component{
             description: '',
             answer : '',
             type: '',
+            detailAnswer:'',
             subTopicMap :new Map()
 
         };
@@ -56,7 +57,8 @@ class Addtheory extends Component{
                var  theoryList = {
                    description : this.state.description,
                    answer :this.state.answer,
-                   type:this.state.type
+                   type:this.state.type,
+                   detailAnswer:this.state.detailAnswer
                }
                this.state.questionList.push(theoryList);
            }
@@ -143,7 +145,8 @@ class Addtheory extends Component{
           const data = {
             description : this.state.description,
             answer :this.state.answer,
-            type:this.state.type
+            type:this.state.type,
+            detailAnswer:this.state.detailAnswer
           }
           this.state.questionList.push(data);
 
@@ -192,13 +195,22 @@ class Addtheory extends Component{
                        <div className="row formAdmin">
                     <label className="col-md-2" for="description">Question Description</label>
                     <div className="col-md-5">
-                        <input type="text" className="form-control formText" id="description" placeholder="Description" onChange={this.handleChange} />
+                        <input type="text" className="form-control formText-one" id="description" placeholder="Description" onChange={this.handleChange} />
                         </div>
                 </div>
+                <div>
+                <div className="row formAdmin">
+                    <label className="col-md-2" for="detailAnswer">Answer Description</label>
+                    <div className="col-md-5">
+                         <textarea className="form-control formText-one" id="detailAnswer" placeholder="Answer details" onChange={this.handleChange}></textarea>
+                        </div>
+                </div>
+             </div>
+
                 <div className="row formAdmin">
                     <label className="col-md-2" for="answer">Answer</label>
                     <div className="col-md-5">
-                        <textarea class="form-control formText" id="answer" onChange={this.handleChange}> 
+                        <textarea className="form-control formText-two" id="answer" onChange={this.handleChange}> 
                         </textarea>
                         </div>
                 </div>

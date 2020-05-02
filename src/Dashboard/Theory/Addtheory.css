@@ -1,0 +1,24 @@
+.formText-one{
+	height: 140px;
+    overflow: auto;
+    max-height: 300px;
+}
+textarea.formText-one{
+	height: 140px;
+    overflow: auto;
+    max-height: 300px;
+    width: 880px;
+    max-width: 100%;
+
+
+
+}
+textarea.formText-two{
+	height: 140px;
+    overflow: auto;
+    max-height: 300px;
+     width: 880px;
+         max-width: 100%;
+
+
+}

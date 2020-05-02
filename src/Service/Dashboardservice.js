@@ -8,15 +8,16 @@ const Dashboardservice = {
     addSubtopicTopic,
     addTheory,
     addMultiple,
-    mapTopic,
     getMenuList,
     getTopicList,
     getSubtopicList,
     getTheoryList
     
+    
 
 };
-
+  
+  
    function getTopicList(){
     const gettopiclist = BASE_URL + "/admin/get/topic/list" 
     return fetch(gettopiclist ,{
@@ -92,18 +93,7 @@ const Dashboardservice = {
     }).then(handleResponse);
    }
 
-   function mapTopic(menuId ,topicId ){
-    const maptopicUrl = BASE_URL 
-    return fetch(maptopicUrl ,{
-        method : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body :  JSON.stringify({
-            menuId : menuId,
-            topicId : topicId
-        })
-    }).then(handleResponse);
-   }
-
+  
 
 
    function handleResponse(response) {

@@ -8,7 +8,8 @@ class Addtopic extends Component{
         this.state = {
          name : '',
          code : '',
-         description : ''
+         description : '',
+         url:''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +25,8 @@ class Addtopic extends Component{
          const data = { 
              name:this.state.name,
              code:this.state.code,
-             description : this.state.description 
+             description : this.state.description ,
+             url:this.state.url
          }
  
          Dashboardservice.addTopic(data)
@@ -62,12 +64,19 @@ class Addtopic extends Component{
                         </div>
                 </div>
                 <div className="row formAdmin">
+                    <label className="col-md-2" for="url">Url : </label>
+                    <div className="col-md-5">
+                        <input type="text" className="form-control formText" id="url" placeholder="Img url" onChange={this.handleChange}/>
+                        </div>
+                </div>
+                <div className="row formAdmin">
                     <label className="col-md-2" for="description">Topic Description : </label>
                     <div className="col-md-5">
                         <textarea class="form-control formText" id="description" onChange={this.handleChange}> 
                         </textarea>
                         </div>
                 </div>
+                
                 <div className="row formAdmin">
                     <div className="col-md-2"></div>
                     <div className="col-md-5">

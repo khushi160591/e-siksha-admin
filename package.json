@@ -6,7 +6,7 @@
     "bootstrap": "^4.4.1",
     "env-cmd": "^10.1.0",
     "hashmap": "^2.4.0",
-    "jquery": "^1.9.1",
+    "jquery": "^3.5.0",
     "popper.js": "^1.16.1",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0",

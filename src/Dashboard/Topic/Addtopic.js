@@ -25,7 +25,7 @@ class Addtopic extends Component{
          const data = { 
              name:this.state.name,
              code:this.state.code,
-             description : this.state.description ,
+             description : this.state.description,
              url:this.state.url
          }
  
@@ -66,7 +66,7 @@ class Addtopic extends Component{
                 <div className="row formAdmin">
                     <label className="col-md-2" for="url">Url : </label>
                     <div className="col-md-5">
-                        <input type="text" className="form-control formText" id="url" placeholder="Img url" onChange={this.handleChange}/>
+                        <input type="text" className="form-control formText" id="url" placeholder="imgurl" onChange={this.handleChange}/>
                         </div>
                 </div>
                 <div className="row formAdmin">

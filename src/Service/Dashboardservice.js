@@ -1,6 +1,6 @@
 import React , {Component} from 'react';
 
-const BASE_URL=process.env.BASE_URL
+const BASE_URL=process.env.REACT_APP_BASE_URL
 
 const Dashboardservice = {
     addTopic,
@@ -57,6 +57,7 @@ const Dashboardservice = {
 
   
    function addTopic(data){
+    console.log(process.env.BASE_URL)
     const addtopicUrl = BASE_URL + "/api/admin/topic/addOrUpdate"
     return fetch(addtopicUrl ,{
         method : 'POST',

@@ -2,6 +2,14 @@ import React , {Component} from 'react';
 import './Addtheory.css';
 import { IoMdAdd } from "react-icons/io";
 import Dashboardservice from '../../Service/Dashboardservice';
+import Dashboard from '../Dashboard';
+import styled from 'styled-components';
+const Active = styled.div`
+
+.formClass{
+    line-height:54px;
+}
+`;
 class Addtheory extends Component{
 constructor(props) {
 super(props);
@@ -13,12 +21,16 @@ selectedTopic:{},
 selectedSubtopic :{}, /**Create empty as for dynamic insertion Object** */
 subTopicList : [],/****Empty array of object ***/
 topicId:0 ,
-questionList:[],
+question:'',
 description: '',
+example:'',
 answer : '',
 type: '',
-detailAnswer:'',
-explanation:'',
+coding:false,
+hints:[],
+hintName:'',
+hintDescription:'',
+testcases:'',
 subTopicMap :new Map()
 };
 this.handleTopicSelect = this.handleTopicSelect.bind(this);
@@ -27,6 +39,8 @@ this.handleChange = this.handleChange.bind(this);
 this.handleAdd = this.handleAdd.bind(this);
 this.handleEvent = this.handleEvent.bind(this);
 this.handleSubmit = this.handleSubmit.bind(this);
+this.handleSelectCoding = this.handleSelectCoding.bind(this);
+
 this.addAttributeTheory();
 }
 
@@ -39,30 +53,28 @@ handleChange = e =>{
 this.setState({
 [e.target.id]: e.target.value /***generic call for achieve target on input or textarea  */
 })
-
 }
 handleSelect = e =>{
 this.setState({
 type: e.target.value
 })
-
 }
+handleSelectCoding = (e) => {
+    this.setState({ coding: e.target.value });
+};
 
 handleAdd = ()=>{
 /***Create array of object to store as pass in api**** */
 /**************************************************** */
-var  theoryList = {
-description : this.state.description,
-answer :this.state.answer,
-type:this.state.type,
-detailAnswer:this.state.detailAnswer,
-explanation:this.state.explanation
+var  hint = {
+    name:this.state.hintName,
+    description:this.state.hintDescription
 }
-this.state.questionList.push(theoryList);
+this.state.hints.push(hint);
 }
 
 handleSubtopicSelect = event =>{
-const  subtId = parseInt(event.target.value);
+const  subtId = event.target.value;
 const subtopic = {
 id : subtId,
 name : this.state.subTopicMap.get(subtId)
@@ -74,7 +86,7 @@ selectedSubtopic: subtopic
 /**********this method for event trigger whhile select on topic ,subtopiclist should change *****/
 handleTopicSelect =event => {
 
-const topicID = parseInt(event.target.value) /***getting value as string convert to integer and pass PARAMETER inside subtopic api method */
+const topicID = event.target.value /***getting value as string convert to integer and pass PARAMETER inside subtopic api method */
 this.getSubtopicList(topicID)
 }
 componentDidMount() {
@@ -132,25 +144,35 @@ alert("error is getting..")
 
 handleSubmit = (e)=>{
 e.preventDefault();
-console.log("handle request ");
-const data = {
-description : this.state.description,
-answer :this.state.answer,
-type:this.state.type,
-detailAnswer:this.state.detailAnswer,
-explanation:this.state.explanation
+var hint={
+    name:this.state.hintName,
+    description:this.state.hintDescription
 }
-this.state.questionList.push(data);
+this.state.hints.push(hint)
+const data = {
+    question :this.state.question,
+    description:this.state.description,
+    example:this.state.example,
+    answer:this.state.answer,
+    type:this.state.type,
+    
+    hints:this.state.hints,
+    coding:this.state.coding
+}
+var questionList = []
+questionList.push(data);
 /****api pass respective value as we are creating in ui as array of object before add api*/
 const obj = {
 subTopicId : this.state.selectedSubtopic.id,
 subTopicName : this.state.selectedSubtopic.name,
-theoryQuestions :this.state.questionList
+questions :questionList,
+testcases:this.state.testcases
 }
-Dashboardservice.addTheory(obj)
+Dashboardservice.addQuestion(obj)
 .then(res => {
 if (res.statusInfo.statusCode === 200) {
-alert("successful....")
+        alert("successful....")
+
 }
 })
 .catch(error => {
@@ -164,56 +186,29 @@ addAttributeTheory() {
 //this method adds label and input field to the state array
 var array = this.state.attributeTheory;
 array.push(<div>
-    <div className="box">
-        <h4><strong>Questions {++this.state.count}</strong></h4>
-        <div className="row formAdmin">
-            <label className="col-md-2" for="inputName">Type</label>
-            <div className="col-md-5">
-                <select className="mdb-select md-form colorful-select dropdown-primary selectBox"
-                    onChange = {this.handleSelect} >
-                    <option name = "default" value = "">Select the Value</option>
-                    <option name = "basic" value = "BASIC">Basic</option>
-                    <option name = "advanced" value = "ADVANCED">Advanced</option>
-                    
-                </select>
+    <div className="boxTheroy">
+        <h4><strong>Hint {++this.state.count}</strong></h4>
+        <div>
+            <div className="row formAdmin">
+                <label className="col-md-2" for="hints">Hints</label>
+                <div className="col-md-8 hintBox">
+                <label className="col-md-1" for="detailAnswer">Name: </label>
+                <div className="col-md-11">
+                     <input type ="text" className="form-control formText-one" id="name" placeholder="name" onChange={this.handleChange} />
+                </div>
+                <label className="col-md-1" for="detailAnswer">Descp: </label>
+                <div className="col-md-11">
+                     <textarea className="form-control formText-two" id="description" placeholder="hint description" onChange={this.handleChange}>
+                     </textarea>
+                 </div>
+                </div>
             </div>
         </div>
-        <div className="row formAdmin">
-            <label className="col-md-2" for="description">Question Description</label>
-            <div className="col-md-5">
-                <input type="text" className="form-control formText-one" id="description" placeholder="Description" onChange={this.handleChange} />
-            </div>
-        </div>
-      
-        
+
        
-        <div>
-            <div className="row formAdmin">
-                <label className="col-md-2" for="explanationAns">Question Explanation</label>
-                <div className="col-md-5">
-                    <textarea className="form-control formText-two" id="explanation" placeholder="Question explain" onChange={this.handleChange}></textarea>
-                </div>
-            </div>
-        </div>
-        <div>
-          <div>
-            <div className="row formAdmin">
-                <label className="col-md-2" for="detailAnswer">Answer Description</label>
-                <div className="col-md-5">
-                     <textarea className="form-control formText-two" id="detailAnswer" placeholder="Answer details" onChange={this.handleChange}></textarea>
-                </div>
-            </div>
-        </div>
-          <div className="row formAdmin">
-            <label className="col-md-2" for="answer">Answer</label>
-            <div className="col-md-5">
-                <textarea className="form-control formText-two" id="answer" onChange={this.handleChange}>
-                </textarea>
-            </div>
-        </div>
+
         </div>
     </div>
-</div>
 );
 this.setState({
 attributeTheory: array
@@ -223,10 +218,11 @@ render(){
 
 return(
 <div>
+    <Active>
     <div className="container">
         <div className="col-md-12 adminRight">
-            
-            <form role="form">
+            <Dashboard></Dashboard>
+            <form role="form" className="formClass">
                 <div className="row formAdmin">
                     <label className="col-md-2" for="inputName">TopicName</label>
                     <div className="col-md-5">
@@ -257,9 +253,68 @@ return(
                 </div>
                 
                 <div className="row formAdmin">
+            <label className="col-md-2" for="inputName">Type</label>
+            <div className="col-md-5">
+                <select className="mdb-select md-form colorful-select dropdown-primary selectBox"
+                    onChange = {this.handleSelect} >
+                    <option name = "default" value = "">Select the Value</option>
+                    <option name = "basic" value = "BASIC">Basic</option>
+                    <option name = "advanced" value = "ADVANCED">Advanced</option>
+                    
+                </select>
+            </div>
+        </div>
+
+        <div className="row formAdmin">
+            <label className="col-md-2" for="description">Question</label>
+            <div className="col-md-5">
+                <input type="text" className="form-control formText-one" id="question" placeholder="question" onChange={this.handleChange} />
+            </div>
+        </div>
+      
+        <div>
+            <div className="row formAdmin">
+                <label className="col-md-2" for="explanationAns">Description</label>
+                <div className="col-md-5">
+                    <textarea className="form-control formText-two" id="description" placeholder="Question description" onChange={this.handleChange}></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <div className="row formAdmin">
+                <label className="col-md-2" for="explanationAns">Example</label>
+                <div className="col-md-5">
+                <input type="text" className="form-control formText-one" id="example" placeholder="Example" onChange={this.handleChange} />
+                </div>
+            </div>
+        </div>
+         
+        <div>
+            <div className="row formAdmin">
+            <label className="col-md-2" for="detailAnswer">Answer</label>
+                <div className="col-md-5">
+                     <textarea className="form-control formText-two" id="answer" placeholder="Answer" onChange={this.handleChange}></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div className="row formAdmin">
+            <label className="col-md-2" for="inputName">Coding</label>
+            <div className="col-md-5">
+                <select className="mdb-select md-form colorful-select dropdown-primary selectBox"
+                    onChange = {this.handleSelectCoding} >
+                    <option name = "default" value = "">Select the Value</option>
+                    <option name = "true" value = "True">True</option>
+                    <option name = "false" value = "False">False</option>
+                    
+                </select>
+            </div>
+        </div>
+                <div className="row formAdmin">
                     <div className="col-md-7"></div>
                     <div className="col-md-5">
-                        <button type="button" onClick={this.handleEvent.bind(this)}  className="btn btn-success btn-lg btnAdd">ADD <IoMdAdd /> </button>
+                        <button type="button" onClick={this.handleEvent}  className="btn btn-success btn-lg btnAdd">ADD <IoMdAdd /> </button>
                     </div>
                 </div>
                 {
@@ -267,16 +322,28 @@ return(
                 return input
                 })
                 }
+              
+              <div>
+                <div className="row formAdmin">
+                <label className="col-md-2" for="detailAnswer">Testcases</label>
+                <div className="col-md-5">
+                     <textarea className="form-control formText-two" id="testcases" placeholder="testcases" onChange={this.handleChange}></textarea>
+                </div>
+            </div>
+        </div>
+
                 <div className="row formAdmin">
                     <div className="col-md-3"></div>
                     <div className="col-md-5">
-                        <button  className="btn btn-primary btn-lg btn-block" onClick = {this.handleSubmit.bind(this)}>Submit</button>
+                        <button  className="btn btn-primary btn-lg btn-block" onClick = {this.handleSubmit}>Submit</button>
                     </div>
                 </div>
                 
+           
             </form>
         </div>
     </div>
+    </Active>
 </div>
 );
 }

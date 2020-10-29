@@ -1,28 +1,62 @@
 import React, { Component } from 'react';
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
-
-// import {Router, Switch} from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route ,Redirect} from "react-router-dom";
+import Auth from '../helper/auth';
+import history from './history/history';
 import Dashboard from '../Dashboard/Dashboard';
+import Login from '../Login/Login';
+import Addmenu from '../Dashboard/Menu/Addmenu';
+import Listmenu from '../Dashboard/Menu/Listmenu';
+import Addtopic from '../Dashboard/Topic/Addtopic';
+
+import Listtopic from '../Dashboard/Topic/Listtopic';
+import Addsubtopic from '../Dashboard/Subtopic/Addsubtopic';
+import Listsubtopic from '../Dashboard/Subtopic/Listsubtopic';
+import Addtheory from '../Dashboard/Theory/Addtheory';
+import Addmultiple from '../Dashboard/Multiple/Addmultiple';
+import Solutionques from '../Dashboard/Solution/Solutionques';
+import Mode from '../Dashboard/Mode/Mode';
 
 class AppRoutes extends Component{
     render(){
         // const { path } = this.props.match;
 
         return(
-            <Router>
+            <Router history={history}>
             <div>
-                <Dashboard>
+               
                 <Switch>
                   
-                   <Route exact path = "/" component = {Dashboard} />
-                  
-                   
+                   <Route exact path = "/" component = {Login} />
+                   <PrivateRoute exact path = "/dashboard" component = {Dashboard} />
+                   <PrivateRoute path = "/menu/add"  component = {Addmenu} />
+                   <PrivateRoute path = "/menu/list" component = {Listmenu} />
+                    <PrivateRoute path = "/topic/add"  component = {Addtopic} />
+                   <PrivateRoute path = "/topic/list"  component = {Listtopic} /> 
+                   <PrivateRoute path = "/subtopic/add"  component = {Addsubtopic} />
+                   <PrivateRoute path = "/subtopic/list"  component = {Listsubtopic} /> 
+                   <PrivateRoute path = "/theory/add"  component = {Addtheory} /> 
+                   <PrivateRoute path = "/multiple/add"  component = {Addmultiple} /> 
+                   <PrivateRoute path = "/solution/add"  component = {Solutionques} /> 
+                   <PrivateRoute path = "/compiler/mode"  component = {Mode} /> 
+
+
                </Switch>
-               </Dashboard>
             </div>
          </Router>
         );
     }
 }
-
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        Auth.isLoggedIn() ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={{ pathname: "/" }} />
+          
+        )
+      }
+    />
+  );
 export default AppRoutes;

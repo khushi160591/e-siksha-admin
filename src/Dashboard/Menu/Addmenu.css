@@ -1,5 +1,5 @@
 .adminRight{
-    padding-top: 50px;
+    /* padding-top: 50px; */
     margin: 0px auto;
     margin: 34px auto;
     padding-bottom: 50px;
@@ -10,4 +10,7 @@
 }
 .formText{
     height: auto;
+}
+.row .formAdmin{
+    height:65px;
 }

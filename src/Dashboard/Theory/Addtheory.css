@@ -1,7 +1,9 @@
 .formText-one{
-height: 140px;
+height: 80px;
 overflow: auto;
 max-height: 300px;
+margin-bottom: 20px;
+
 }
 textarea.formText-one{
 height: 140px;
@@ -9,6 +11,7 @@ overflow: auto;
 max-height: 300px;
 width: 880px;
 max-width: 100%;
+margin-bottom: 20px;
 }
 textarea.formText-two{
 height: 140px;
@@ -16,6 +19,8 @@ overflow: auto;
 max-height: 300px;
 width: 880px;
 max-width: 100%;
+margin-bottom: 20px;
+
 }
 textarea .formText-three{
  display:inline-block;
@@ -23,6 +28,8 @@ textarea .formText-three{
     min-height: 200px;
     width: 300px;
     overflow: auto;
+    margin-bottom: 20px;
+
 }
 .quesExplain{
 display: inline-block;
@@ -35,4 +42,15 @@ display: inline-block;
     max-height: 400px;
     word-wrap:break-word;
     text-overflow: ellipsis;   
+}
+.hintBox{
+    /* border: 1px solid #ccc; */
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.boxTheroy{
+    border: 1px solid #ccc;
+    /* padding: 3%; */
+    padding: 12px;
+    margin-bottom: 6px;
 }

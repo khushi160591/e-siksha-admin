@@ -1,7 +1,13 @@
 import React , {Component} from 'react';
 import './Addtopic.css';
 import Dashboardservice from '../../Service/Dashboardservice';
-
+import Dashboard from '../Dashboard';
+import styled from 'styled-components';
+const Active = styled.div`
+.row {
+    height:65px;
+}
+`;
 class Addtopic extends Component{
     constructor(props){
         super(props);
@@ -20,7 +26,7 @@ class Addtopic extends Component{
          [event.target.id]:event.target.value 
      })
      }
-     handleSubmit (event){
+     handleSubmit = (event)=>{
          event.preventDefault();
          const data = { 
              name:this.state.name,
@@ -46,10 +52,10 @@ class Addtopic extends Component{
 
         return(
            <div>
-   
+              <Active>
                 <div className="container">
                 <div className="col-md-12 adminRight">
-
+                 <Dashboard></Dashboard>
                     <form role="form" onSubmit={this.handleSubmit}>
                 <div className="row formAdmin">
                     <label className="col-md-2" for="name">Name : </label>
@@ -87,6 +93,7 @@ class Addtopic extends Component{
                 </form>
                 </div>
                 </div>
+                </Active>
                 </div>
         );
     }

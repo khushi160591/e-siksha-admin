@@ -2,6 +2,13 @@ import React , {Component} from 'react';
 import './Addsubtopic.css';
 import { IoMdAdd } from "react-icons/io";
 import Dashboardservice from '../../Service/Dashboardservice';
+import Dashboard from '../Dashboard';
+import styled from 'styled-components';
+const Active = styled.div`
+.row {
+    height:45px;
+}
+`;
 
 
 class Addsubtopic extends Component{
@@ -58,7 +65,7 @@ class Addsubtopic extends Component{
    
 
     handleSelect = event =>{
-        const tId = parseInt(event.target.value);
+        const tId = event.target.value;
         const topic = {
             id:tId,
             name:this.state.topicListMap.get(tId)
@@ -167,9 +174,10 @@ class Addsubtopic extends Component{
          
         return(
             <div>
+                <Active>
            <div className="container">
-
                 <div className="col-md-12 adminRight">
+                <Dashboard></Dashboard>
                 <h3><strong>TOPIC</strong></h3>
 
                     <form role="form">
@@ -210,7 +218,7 @@ class Addsubtopic extends Component{
                 </form>
                 </div>
                 </div>
-
+                </Active>
             </div>
         );
     }

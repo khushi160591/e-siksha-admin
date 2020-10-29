@@ -1,7 +1,14 @@
 import React , {Component} from 'react';
 import './Addmenu.css';
 import Dashboardservice from '../../Service/Dashboardservice';
+import Dashboard from '../Dashboard';
+import styled from 'styled-components';
 
+const Active = styled.div`
+.row {
+    height:65px;
+}
+`;
 class Addmenu extends Component{
 
    constructor(props){
@@ -20,7 +27,7 @@ class Addmenu extends Component{
         [event.target.id]:event.target.value 
     })
     }
-    handleSubmit (event){
+    handleSubmit = (event)=>{
         event.preventDefault();
         const data = { 
             name:this.state.name,
@@ -46,10 +53,10 @@ class Addmenu extends Component{
 
         return(
   <div>
-   
+   <Active>
                 <div className="container">
                 <div className="col-md-12 adminRight">
-
+                <Dashboard></Dashboard>
                     <form role="form" onSubmit={this.handleSubmit} >
                 <div className="row formAdmin">
                     <label className="col-md-1" for="inputName">Name</label>
@@ -79,6 +86,7 @@ class Addmenu extends Component{
                 </form>
                 </div>
                 </div>
+                </Active>
                 </div>
         );
     }

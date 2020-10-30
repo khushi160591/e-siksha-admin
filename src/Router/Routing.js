@@ -15,6 +15,7 @@ import Addtheory from '../Dashboard/Theory/Addtheory';
 import Addmultiple from '../Dashboard/Multiple/Addmultiple';
 import Solutionques from '../Dashboard/Solution/Solutionques';
 import Mode from '../Dashboard/Mode/Mode';
+import TheoryDetail from '../Dashboard/TheoryDetail/Theorydetail';
 
 class AppRoutes extends Component{
     render(){
@@ -37,7 +38,7 @@ class AppRoutes extends Component{
                    <PrivateRoute path = "/theory/add"  component = {Addtheory} /> 
                    <PrivateRoute path = "/multiple/add"  component = {Addmultiple} /> 
                    <PrivateRoute path = "/solution/add"  component = {Solutionques} /> 
-                   <PrivateRoute path = "/compiler/mode"  component = {Mode} /> 
+                   <PrivateRoute path = "/theorydetail/add"  component = {TheoryDetail} /> 
 
 
                </Switch>

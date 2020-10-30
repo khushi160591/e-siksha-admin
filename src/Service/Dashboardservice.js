@@ -17,9 +17,18 @@ const Dashboardservice = {
     getQuestions,
     addCompilerMode,
     addQuestion,
-    updateQuestionStatus
+    updateQuestionStatus,
+    addTheoryDetail
 };
-
+function addTheoryDetail(data){
+    const addTheoryDetailUrl = BASE_URL + "/api/siksha/admin/theory/addOrUpdate"
+    return fetch(addTheoryDetailUrl ,{
+        method : 'POST',
+        headers: { 'Content-Type': 'application/json',
+                   'Authorization': Auth.get('accessToken') },
+        body :  JSON.stringify(data)
+    }).then(handleResponse);
+   }
 function updateQuestionStatus(data){
     const updateStatusUrl = BASE_URL + "/api/siksha/interview/update/question/status"
     return fetch(updateStatusUrl ,{

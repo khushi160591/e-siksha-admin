@@ -1,0 +1,11 @@
+.selectBoxes{
+    width: 442px;
+    height: 41px;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+.selectBoxes option{
+    height: 60px;
+    max-height: 80px;
+    overflow: auto;
+}

@@ -114,12 +114,12 @@ class Dashboard extends Component {
 											<li>
 												<Link to='/'>
 													{' '}
-													Question <IoIosArrowDown style={mystyle} />{' '}
+													TheoryDetail <IoIosArrowDown style={mystyle} />{' '}
 												</Link>{' '}
 												<ul className='submenu'>
 													<li>
 														<a>
-															<Link to='/compiler/mode'> Mode </Link>{' '}
+															<Link to='/theorydetail/add'> Theory </Link>{' '}
 														</a>{' '}
 													</li>{' '}
 												</ul>{' '}

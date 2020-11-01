@@ -108,8 +108,25 @@ class Dashboard extends Component {
 															<Link to='/solution/add'> Solution Question </Link>{' '}
 														</a>{' '}
 													</li>{' '}
+													
 												</ul>{' '}
 											</li>{' '}
+                                            
+											<li>
+												<Link to='/'>
+													{' '}
+													SolutionAdd <IoIosArrowDown style={mystyle} />{' '}
+												</Link>{' '}
+												<ul className='submenu'>
+													<li>
+														<a>
+															<Link to='/solution/add/question'>  Add Solution  </Link>{' '}
+														</a>{' '}
+													</li>{' '}
+												</ul>{' '}
+											</li>{' '}
+											
+
 
 											<li>
 												<Link to='/'>
@@ -124,7 +141,21 @@ class Dashboard extends Component {
 													</li>{' '}
 												</ul>{' '}
 											</li>{' '}
+											<li>
+												<Link to='/'>
+													{' '}
+													TestCases <IoIosArrowDown style={mystyle} />{' '}
+												</Link>{' '}
+												<ul className='submenu'>
+													<li>
+														<a>
+															<Link to='/testcase/add'> Add Testcase </Link>{' '}
+														</a>{' '}
+													</li>{' '}
+												</ul>{' '}
+											</li>{' '}
 											
+
 											<li>
 												<Link to='/'>
 													{' '}

@@ -16,6 +16,8 @@ import Addmultiple from '../Dashboard/Multiple/Addmultiple';
 import Solutionques from '../Dashboard/Solution/Solutionques';
 import Mode from '../Dashboard/Mode/Mode';
 import TheoryDetail from '../Dashboard/TheoryDetail/Theorydetail';
+import Solutionadd from '../Dashboard/Solution/SolutionAdd/Solutionadd';
+import Testcases from '../Dashboard/TestCases/Testcases';
 
 class AppRoutes extends Component{
     render(){
@@ -37,9 +39,10 @@ class AppRoutes extends Component{
                    <PrivateRoute path = "/subtopic/list"  component = {Listsubtopic} /> 
                    <PrivateRoute path = "/theory/add"  component = {Addtheory} /> 
                    <PrivateRoute path = "/multiple/add"  component = {Addmultiple} /> 
-                   <PrivateRoute path = "/solution/add"  component = {Solutionques} /> 
+                   <PrivateRoute exact path = "/solution/add"  component = {Solutionques} /> 
                    <PrivateRoute path = "/theorydetail/add"  component = {TheoryDetail} /> 
-
+                   <PrivateRoute exact path = "/solution/add/question"  component = {Solutionadd} /> 
+                    <PrivateRoute  path = "/testcase/add"  component = {Testcases} /> 
 
                </Switch>
             </div>

@@ -285,7 +285,7 @@ return(
             <div className="row formAdmin">
                 <label className="col-md-2" for="explanationAns">Example</label>
                 <div className="col-md-5">
-                <input type="text" className="form-control formText-one" id="example" placeholder="Example" onChange={this.handleChange} />
+                <textarea className="form-control formText-two" id="example" placeholder="Question Example" onChange={this.handleChange}></textarea>
                 </div>
             </div>
         </div>

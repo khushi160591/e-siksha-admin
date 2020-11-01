@@ -18,8 +18,28 @@ const Dashboardservice = {
     addCompilerMode,
     addQuestion,
     updateQuestionStatus,
-    addTheoryDetail
+    addTheoryDetail,
+    addSolution,
+    addTestCases
 };
+function addTestCases(data){
+const addTestCasesUrl = BASE_URL + "/api/compiler/testcases/add"
+return fetch(addTestCasesUrl,{
+    method:'POST',
+    headers:{'Content-Type':'application/json',
+            'Authorization':Auth.get('accessToken')},
+    body:JSON.stringify(data) 
+}).then(handleResponse);
+}
+function addSolution(data){
+    const addSolutionUrl = BASE_URL + "/api/compiler/solution/add"
+    return fetch(addSolutionUrl ,{
+        method : 'POST',
+        headers: { 'Content-Type': 'application/json',
+                   'Authorization': Auth.get('accessToken') },
+        body :  JSON.stringify(data)
+    }).then(handleResponse);
+   }
 function addTheoryDetail(data){
     const addTheoryDetailUrl = BASE_URL + "/api/siksha/admin/theory/addOrUpdate"
     return fetch(addTheoryDetailUrl ,{

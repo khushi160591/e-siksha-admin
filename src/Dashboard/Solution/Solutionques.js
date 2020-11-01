@@ -161,6 +161,7 @@ export default class Solutionques extends Component {
 				if (res.statusInfo.statusCode == 200) {
 					this.setState( {
 						questionLists: res.responseData,
+						questionId:res.responseData[0].id,
 						type:type,
 						selectedSubtopic:subtopic,
 						isCoding:coding

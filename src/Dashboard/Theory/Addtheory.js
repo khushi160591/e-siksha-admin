@@ -155,7 +155,7 @@ const data = {
     example:this.state.example,
     answer:this.state.answer,
     type:this.state.type,
-    
+    testCase:this.state.testcases,
     hints:this.state.hints,
     coding:this.state.coding
 }
@@ -165,8 +165,7 @@ questionList.push(data);
 const obj = {
 subTopicId : this.state.selectedSubtopic.id,
 subTopicName : this.state.selectedSubtopic.name,
-questions :questionList,
-testcases:this.state.testcases
+questions :questionList
 }
 Dashboardservice.addQuestion(obj)
 .then(res => {
@@ -194,11 +193,11 @@ array.push(<div>
                 <div className="col-md-8 hintBox">
                 <label className="col-md-1" for="detailAnswer">Name: </label>
                 <div className="col-md-11">
-                     <input type ="text" className="form-control formText-one" id="name" placeholder="name" onChange={this.handleChange} />
+                     <input type ="text" className="form-control formText-one" id="hintName" placeholder="name" onChange={this.handleChange} />
                 </div>
                 <label className="col-md-1" for="detailAnswer">Descp: </label>
                 <div className="col-md-11">
-                     <textarea className="form-control formText-two" id="description" placeholder="hint description" onChange={this.handleChange}>
+                     <textarea className="form-control formText-two" id="hintDescription" placeholder="hint description" onChange={this.handleChange}>
                      </textarea>
                  </div>
                 </div>
@@ -311,6 +310,7 @@ return(
                 </select>
             </div>
         </div>
+        
                 <div className="row formAdmin">
                     <div className="col-md-7"></div>
                     <div className="col-md-5">

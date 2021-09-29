@@ -174,7 +174,6 @@ export default class Testcases extends Component {
 		e.preventDefault();
 		console.log('handle request ');
 		const data = {
-			questionId: this.state.questionId,
             name:this.state.name,
             testcase:this.state.testcase,
             answer:this.state.answer,
@@ -184,7 +183,8 @@ export default class Testcases extends Component {
         testcases.push(data);
         /****api pass respective value as we are creating in ui as array of object before add api*/
         const obj = {
-        testCase :testcases
+        questionId: this.state.questionId,
+        testcases :testcases
         }
 
 		Dashboardservice.addTestCases(obj)

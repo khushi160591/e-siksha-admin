@@ -21,6 +21,7 @@ export default class Solutionadd extends Component {
             questionList:[],
             solution:'',
             mainProgram:'',
+            resultMatcher:'',
             lang:''
 		};
 		this.handleTopicSelect = this.handleTopicSelect.bind(this);
@@ -32,6 +33,8 @@ export default class Solutionadd extends Component {
 		this.handleSelectCoding = this.handleSelectCoding.bind(this);
 		this.handleSubtopicSelect = this.handleSubtopicSelect.bind(this);
 		this.handleQuestionSelect = this.handleQuestionSelect.bind(this);
+        this.handleSelectMatcher = this.handleSelectMatcher.bind(this);
+        
     }
     
     handleSelect = (e) => {
@@ -50,6 +53,14 @@ export default class Solutionadd extends Component {
 			this.setState({type:type})
 		}
 	};
+
+   handleSelectMatcher = (e) => {
+      
+       this.setState({
+            resultMatcher: e.target.value,
+        });
+    };
+
 
 	handleSelectCoding = (e) => {
 		const coding = e.target.value
@@ -176,7 +187,8 @@ export default class Solutionadd extends Component {
 			questionId: this.state.questionId,
             solution:this.state.solution,
             lang:this.state.lang,
-            mainProgram:this.state.mainProgram
+            mainProgram:this.state.mainProgram,
+            resultMatcher: this.state.resultMatcher
 		};
 		Dashboardservice.addSolution(data)
 			.then((res) => {
@@ -275,6 +287,79 @@ export default class Solutionadd extends Component {
                         </select>
                     </div>
                 </div>
+                 <div className='row formAdmin'>
+                    <label className='col-md-2' for='inputName'>
+                        Result Matcher
+                    </label>
+                    <div className='col-md-5'>
+                        <select
+                            className='mdb-select md-form colorful-select dropdown-primary selectBoxs'
+                            onChange={this.handleSelectMatcher}
+                        >
+                              <option name = "default" value = "">Select the Value</option>
+                            <option name='StringMatcher' value="StringMatcher">
+                                StringMatcher
+                            </option>
+                            <option name='LongMatcher' value="LongMatcher">
+                                LongMatcher
+                            </option>
+                            <option name='IntegerMatcher' value="IntegerMatcher">
+                                IntegerMatcher
+                            </option>
+                            <option name='DoubleMatcher' value="DoubleMatcher">
+                                DoubleMatcher
+                            </option>   
+                             <option name='Array1DDoubleMatcher' value="Array1DDoubleMatcher">
+                                Array1DDoubleMatcher
+                            </option>
+                            <option name='Array1DIntegerMatcher' value="Array1DIntegerMatcher">
+                                Array1DIntegerMatcher
+                            </option>
+                            <option name='Array1DLongMatcher' value="Array1DLongMatcher">
+                                Array1DLongMatcher
+                            </option>
+                            <option name='Array1DStringMatcher' value="Array1DStringMatcher">
+                                Array1DStringMatcher
+                            </option>  
+                             <option name='Array1DDoubleMatcherElement' value="Array1DDoubleMatcherElement">
+                                Array1DDoubleMatcherElement
+                            </option>
+                            <option name='Array1DIntegerMatcherElement' value="Array1DIntegerMatcherElement">
+                                Array1DIntegerMatcherElement
+                            </option>
+                            <option name='Array1DLongMatcherElement' value="Array1DLongMatcherElement">
+                                Array1DLongMatcherElement
+                            </option>
+                            <option name='Array1DStringMatcherElement' value="Array1DStringMatcherElement">
+                                Array1DStringMatcherElement
+                            </option>   
+                             <option name='Array2DDoubleMatcher' value="Array2DDoubleMatcher">
+                                Array2DDoubleMatcher
+                            </option>
+                            <option name='Array2DIntegerMatcher' value="Array2DIntegerMatcher">
+                                Array2DIntegerMatcher
+                            </option>
+                            <option name='Array2DLongMatcher' value="Array2DLongMatcher">
+                                Array2DLongMatcher
+                            </option>
+                            <option name='Array2DStringMatcher' value="Array2DStringMatcher">
+                                Array2DStringMatcher
+                            </option> 
+                            <option name='Array2DDoubleMatcherElement' value="Array2DDoubleMatcherElement">
+                                Array2DDoubleMatcherElement
+                            </option>
+                            <option name='Array2DIntegerMatcherElement' value="Array2DIntegerMatcherElement">
+                                Array2DIntegerMatcherElement
+                            </option> 
+                            <option name='Array2DLongMatcherElement' value="Array2DLongMatcherElement">
+                                Array2DLongMatcherElement
+                            </option>
+                            <option name='Array2DStringMatcherElement' value="Array2DStringMatcherElement">
+                                Array2DStringMatcherElement
+                            </option> 
+                        </select>
+                    </div>
+                </div>
 
                 <div className='row formAdmin'>
                     <label className='col-md-2' for='inputName'>
@@ -304,16 +389,16 @@ export default class Solutionadd extends Component {
                             onChange={this.handleSelect}
                         >
                         <option name = "default" value = "">Select the lang</option>
-                            <option name='basic' value="JAVA">
+                            <option name='basic' value="java">
                                Java
                             </option>
-                            <option name='advanced' value="PYTHON">
+                            <option name='advanced' value="python">
                                 Python
                             </option>
-                            <option name='advanced' value="C">
+                            <option name='advanced' value="c">
                                C
                             </option>
-                            <option name='advanced' value="C++">
+                            <option name='advanced' value="c++">
                                 C++
                             </option>
                         </select>
